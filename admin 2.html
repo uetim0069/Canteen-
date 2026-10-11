@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><title>Kitchen Admin</title>
+<style>
+:root{--bg:#fff7ea;--card:#fff;--tx:#2b1a10;--mut:#7a6455;--ac:#c0392b;--gd:#e8a317;--ln:#eadcc6;--ok:#1e8e4e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b130d;--card:#271b13;--tx:#f8ecdd;--mut:#c4ad98;--ac:#ff6b57;--gd:#f2b630;--ln:#3b2b1f;--ok:#4cd98a}}
+:root[data-theme="dark"]{--bg:#1b130d;--card:#271b13;--tx:#f8ecdd;--mut:#c4ad98;--ac:#ff6b57;--gd:#f2b630;--ln:#3b2b1f;--ok:#4cd98a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,sans-serif;line-height:1.4}
+main{max-width:760px;margin:0 auto;padding:12px}
+h1{font-size:20px;margin:0}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.tabs{display:flex;gap:6px;margin-bottom:10px}
+button,select{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:8px 12px;cursor:pointer}
+button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+button.go{background:var(--ac);color:#fff;border:0;width:100%;padding:12px;font-weight:700;margin:6px 0}
+input,textarea,select{box-sizing:border-box;font:16px system-ui,sans-serif;padding:9px 10px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);width:100%;margin:3px 0}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:12px;margin:8px 0}
+.rw{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.rw>*{flex:1}.rw input[type=checkbox]{width:auto;flex:none}
+label{font-size:13px;color:var(--mut);display:inline-flex;align-items:center;gap:4px}
+.days{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}.days input{width:auto}
+.st{font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;background:var(--bg);border:1px solid var(--ln)}
+.st.new{color:#fff;background:var(--ac);border-color:var(--ac)}
+.it{display:flex;justify-content:space-between;gap:8px;font-size:14px;padding:2px 0}.it small{color:var(--mut);display:block}
+.msg{padding:10px;border-radius:10px;background:var(--card);border:1px dashed var(--gd);font-size:14px}
+.err{color:var(--ac);font-size:14px;min-height:18px}
+#ts{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#222;color:#fff;padding:8px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .25s;pointer-events:none}#ts.on{opacity:1}
+</style></head><body><main id="app"></main><div id="ts"></div>
+<script src="config.js"></script>
+<script type="module">
+const SB=window.SB||{url:'',key:''};
+const DN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),fmt=n=>'\u20A6'+Math.round(n||0).toLocaleString('en-US');
+let ses=null,tab='orders',orders=[],menu=[],set={},seen=new Set(),first=true,flt='active',tm=null;
+try{ses=JSON.parse(localStorage.getItem('adm')||'null')}catch(e){}
+const toast=t=>{const e=$('ts');e.textContent=t;e.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove('on'),1600)};
+async function auth(body,grant){const r=await fetch(SB.url+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:SB.key,'Content-Type':'application/json'},body:JSON.stringify(body)}),j=await r.json();
+ if(!r.ok)throw new Error(j.error_description||j.msg||'Login failed');ses={at:j.access_token,rt:j.refresh_token,exp:Date.now()+j.expires_in*1000};try{localStorage.setItem('adm',JSON.stringify(ses))}catch(e){}}
+function logout(){ses=null;clearInterval(tm);try{localStorage.removeItem('adm')}catch(e){}view()}
+async function api(path,opt={}){if(!ses)throw new Error('auth');
+ if(ses.exp<Date.now()+30000){try{await auth({refresh_token:ses.rt},'refresh_token')}catch(e){logout();throw e}}
+ const r=await fetch(SB.url+'/rest/v1/'+path,{...opt,headers:{apikey:SB.key,Authorization:'Bearer '+ses.at,'Content-Type':'application/json',Prefer:'return=representation',...(opt.headers||{})}});
+ if(r.status===401){logout();throw new Error('auth')}if(!r.ok)throw new Error(await r.text());return r.status===204?null:r.json()}
+function beep(){try{const a=new(window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator();o.connect(a.destination);o.frequency.value=880;o.start();setTimeout(()=>{o.stop();a.close()},350)}catch(e){}}
+function view(){const app=$('app');
+ if(!SB.url){app.innerHTML='<div class="msg"><b>Not connected yet.</b><br>Open config.js in a text editor and paste your Supabase Project URL and anon key.</div>';return}
+ if(!ses){app.innerHTML=`<div class="top"><h1>Kitchen Admin</h1></div><div class="card"><input id="em" type="email" placeholder="Email" autocomplete="username"><input id="pw" type="password" placeholder="Password" autocomplete="current-password"><div class="err" id="er"></div><button class="go" id="li">Log in</button></div>`;
+  $('li').onclick=async()=>{try{await auth({email:$('em').value.trim(),password:$('pw').value},'password');view()}catch(e){$('er').textContent=e.message}};
+  $('pw').onkeydown=e=>{if(e.key==='Enter')$('li').click()};return}
+ app.innerHTML=`<div class="top"><h1>Kitchen Admin</h1><button id="lo">Log out</button></div><div class="tabs"><button data-t="orders">Orders <span id="nb"></span></button><button data-t="menu">Menu</button><button data-t="settings">Settings</button></div><div id="pane"></div>`;
+ $('lo').onclick=logout;document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>go(b.dataset.t));go(tab);
+ clearInterval(tm);tm=setInterval(()=>loadOrders().catch(()=>{}),20000)}
+async function go(t){tab=t;document.querySelectorAll('[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('pane').innerHTML='<p>Loading...</p>';
+ try{if(t==='orders'){await loadOrders()}else if(t==='menu'){menu=await api('menu_items?order=sort.asc,id.asc');drawMenu()}else{const s=await api('settings?id=eq.1');set=(s[0]&&s[0].data)||{};drawSettings()}}catch(e){if(e.message!=='auth')$('pane').innerHTML='<div class="msg">Could not load: '+esc(e.message)+'</div>'}}
+/* orders */
+async function loadOrders(){orders=await api('orders?order=created_at.desc&limit=100');
+ if(!first&&orders.some(o=>!seen.has(o.id)&&o.status==='new')){beep();toast('New order!')}orders.forEach(o=>seen.add(o.id));first=false;
+ const n=orders.filter(o=>o.status==='new').length;if($('nb'))$('nb').textContent=n?'('+n+')':'';if(tab==='orders')drawOrders()}
+const ST=['new','preparing','ready','done','cancelled'];
+function drawOrders(){const L=orders.filter(o=>flt==='all'||(flt==='active'?['new','preparing','ready'].includes(o.status):['done','cancelled'].includes(o.status)));
+ $('pane').innerHTML=`<div class="rw" style="margin-bottom:6px">${['active','done','all'].map(f=>`<button data-f="${f}" class="${flt===f?'on':''}">${f==='active'?'Active':f==='done'?'Finished':'All'}</button>`).join('')}<button id="rf">Refresh</button></div>`
+ +(L.length?L.map(o=>`<div class="card"><div class="rw"><b>#${o.id} ${esc(o.customer||'No name')}</b><span class="st ${o.status}">${o.status}</span></div><small style="color:var(--mut)">${new Date(o.created_at).toLocaleString('en-GB')} \u00B7 ${o.mode==='delivery'?'Delivery: '+esc(o.address||'no address'):'Pickup'}</small>
+  ${(o.items||[]).map(i=>`<div class="it"><span>${i.q} x ${esc(i.n)}${i.o||i.note?`<small>${esc([i.o,i.note].filter(Boolean).join(' | '))}</small>`:''}</span><span>${fmt(i.t)}</span></div>`).join('')}
+  <div class="it"><b>Total${o.fee?' (incl. delivery '+fmt(o.fee)+')':''}</b><b>${fmt(o.total)}</b></div>
+  <div class="rw" style="margin-top:6px">${ST.filter(s=>s!==o.status).map(s=>`<button data-o="${o.id}" data-s="${s}">${s}</button>`).join('')}</div></div>`).join(''):'<p>No orders here yet.</p>');
+ document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{flt=b.dataset.f;drawOrders()});$('rf').onclick=()=>loadOrders().then(()=>toast('Updated'));
+ document.querySelectorAll('[data-o]').forEach(b=>b.onclick=async()=>{try{await api('orders?id=eq.'+b.dataset.o,{method:'PATCH',body:JSON.stringify({status:b.dataset.s})});orders.find(o=>o.id==b.dataset.o).status=b.dataset.s;drawOrders();toast('Order updated')}catch(e){toast('Failed')}})}
+/* menu */
+function row(m){const d=m.special_days||[];return `<div class="card" data-id="${m.id}"><div class="rw"><input data-f="emoji" value="${esc(m.emoji)}" style="max-width:64px"><input data-f="name" value="${esc(m.name)}"></div>
+ <div class="rw"><input data-f="category" list="cl" value="${esc(m.category)}"><input data-f="price" type="number" inputmode="numeric" value="${m.price}" style="max-width:120px"></div>
+ <div class="rw"><select data-f="extras"><option value="">No extras</option><option value="prot" ${m.extras==='prot'?'selected':''}>Protein extras</option><option value="soup" ${m.extras==='soup'?'selected':''}>Soup extras</option></select><label><input type="checkbox" data-f="spice" ${m.spice?'checked':''}> Spice choice</label></div>
+ <input data-f="tags" placeholder="tags: hearty, light, spicy" value="${esc(m.tags)}"><div class="days"><label>Special on:</label>${DN.map((n,i)=>`<label><input type="checkbox" data-d="${i}" ${d.includes(i)?'checked':''}>${n.slice(0,3)}</label>`).join('')}</div>
+ <div class="rw"><button data-a="save" class="on">Save</button><button data-a="av">${m.sold_out?'Put back on menu':'Mark sold out'}</button><button data-a="del">Delete</button></div>${m.sold_out?'<small style="color:var(--ac)">Marked sold out on the website</small>':''}</div>`}
+function drawMenu(){const cats=[...new Set(menu.map(m=>m.category))];
+ $('pane').innerHTML=`<datalist id="cl">${cats.map(c=>`<option value="${esc(c)}">`).join('')}</datalist><button class="go" id="nm">+ Add a menu item</button>`+menu.map(row).join('');
+ $('nm').onclick=async()=>{try{await api('menu_items',{method:'POST',body:JSON.stringify({category:cats[0]||'Rice',name:'New item',price:1000,sort:menu.length+1})});menu=await api('menu_items?order=sort.asc,id.asc');drawMenu();toast('Added. Edit it and tap Save.')}catch(e){toast('Failed')}};
+ document.querySelectorAll('[data-a]').forEach(b=>b.onclick=async()=>{const c=b.closest('.card'),id=c.dataset.id,m=menu.find(x=>x.id==id);
+  try{if(b.dataset.a==='save'){const g=f=>c.querySelector(`[data-f="${f}"]`),body={emoji:g('emoji').value,name:g('name').value.trim(),category:g('category').value.trim(),price:Math.max(0,parseInt(g('price').value)||0),extras:g('extras').value,spice:g('spice').checked,tags:g('tags').value.trim(),special_days:[...c.querySelectorAll('[data-d]')].filter(x=>x.checked).map(x=>+x.dataset.d)};
+    if(!body.name||!body.category)return toast('Name and category needed');Object.assign(m,(await api('menu_items?id=eq.'+id,{method:'PATCH',body:JSON.stringify(body)}))[0]);toast('Saved')}
+   else if(b.dataset.a==='av'){m.sold_out=!m.sold_out;await api('menu_items?id=eq.'+id,{method:'PATCH',body:JSON.stringify({sold_out:m.sold_out})});drawMenu();toast(m.sold_out?'Marked sold out':'Back on the menu')}
+   else if(confirm('Delete '+m.name+'?')){await api('menu_items?id=eq.'+id,{method:'DELETE'});menu=menu.filter(x=>x.id!=id);drawMenu();toast('Deleted')}}catch(e){toast('Failed: '+e.message.slice(0,60))}})}
+/* settings */
+function drawSettings(){const h=set.hours||[null,[8,19],[8,19],[8,19],[8,19],[8,19],[9,18]],f=(k,l,t='text')=>`<label>${l}</label><input data-s="${k}" type="${t}" value="${esc(set[k])}">`;
+ $('pane').innerHTML=`<div class="card">${f('name','Business name')}${f('tagline','Tagline')}${f('phone','WhatsApp number (234 then number without the first 0)')}${f('phoneShow','Phone number to show')}${f('address','Address')}${f('fee','Delivery fee (naira)','number')}<label>About us</label><textarea data-s="about" rows="3">${esc(set.about)}</textarea></div>
+ <div class="card"><b>Opening hours</b> <small style="color:var(--mut)">(24-hour clock, e.g. 8 and 19 mean 8am to 7pm)</small>${DN.map((n,i)=>`<div class="rw" data-h="${i}"><label style="min-width:90px">${n}</label><label><input type="checkbox" class="op" ${h[i]?'checked':''}> Open</label><input class="o1" type="number" step="0.5" value="${h[i]?h[i][0]:8}"><input class="o2" type="number" step="0.5" value="${h[i]?h[i][1]:19}"></div>`).join('')}</div><button class="go" id="ss">Save settings</button>`;
+ $('ss').onclick=async()=>{const body={...set,hours:DN.map((_,i)=>{const r=document.querySelector(`[data-h="${i}"]`);return r.querySelector('.op').checked?[+r.querySelector('.o1').value,+r.querySelector('.o2').value]:null})};
+  document.querySelectorAll('[data-s]').forEach(e=>{body[e.dataset.s]=e.type==='number'?(parseInt(e.value)||0):e.value});
+  try{await api('settings',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=representation'},body:JSON.stringify({id:1,data:body})});set=body;toast('Saved. The website updates on next load.')}catch(e){toast('Failed: '+e.message.slice(0,60))}}}
+view();
+</script></body></html>

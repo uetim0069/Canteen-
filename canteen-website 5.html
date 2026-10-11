@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mama's Kitchen - Home-cooked Nigerian Meals</title>
+<style>
+:root{--bg:#fff7ea;--card:#fff;--tx:#2b1a10;--mut:#7a6455;--ac:#c0392b;--gd:#e8a317;--ln:#eadcc6;--ok:#1e8e4e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b130d;--card:#271b13;--tx:#f8ecdd;--mut:#c4ad98;--ac:#ff6b57;--gd:#f2b630;--ln:#3b2b1f;--ok:#4cd98a}}
+:root[data-theme="dark"]{--bg:#1b130d;--card:#271b13;--tx:#f8ecdd;--mut:#c4ad98;--ac:#ff6b57;--gd:#f2b630;--ln:#3b2b1f;--ok:#4cd98a}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Georgia,'Times New Roman',serif;line-height:1.5}
+.w{max-width:900px;margin:0 auto;padding:0 18px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--ln);padding:10px 18px;display:flex;align-items:center;gap:10px}
+nav b{font-size:18px;flex:1}
+.pill{font:700 12px system-ui,sans-serif;padding:4px 10px;border-radius:999px;background:var(--card);border:1px solid var(--ln)}
+.pill.o{color:var(--ok)}.pill.c{color:var(--ac)}
+button{font:inherit;color:var(--tx);cursor:pointer}
+#cb{font:700 14px system-ui,sans-serif;background:var(--ac);color:#fff;border:0;border-radius:999px;padding:8px 14px}
+.hero{background:linear-gradient(135deg,#8e1b10,#c0392b 55%,#e8a317);color:#fff;padding:48px 0 40px;text-align:center}
+.hero h1{font-size:clamp(34px,8vw,54px);margin:0 0 8px;line-height:1.1}
+.hero p{font:18px system-ui,sans-serif;margin:0 auto 18px;max-width:480px}
+.btn{display:inline-block;font:700 15px system-ui,sans-serif;text-decoration:none;padding:12px 20px;border-radius:999px;margin:4px;border:2px solid #fff;color:#fff}
+.btn.p{background:#fff;color:#8e1b10}
+#sp{display:inline-block;margin-top:14px;background:rgba(255,255,255,.18);border-radius:12px;padding:8px 14px;font:700 14px system-ui,sans-serif;cursor:pointer}
+section{padding:30px 0}
+h2{font-size:28px;margin:0 0 4px}.sub{font:14px system-ui,sans-serif;color:var(--mut);margin:0 0 14px}
+input{width:100%;box-sizing:border-box;font:16px system-ui,sans-serif;padding:11px 12px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);margin:6px 0}
+.tabs,.chips{display:flex;gap:8px;overflow-x:auto;flex-wrap:wrap;padding:6px 0}
+.tabs{flex-wrap:nowrap}
+.tab,.chip{font:600 14px system-ui,sans-serif;background:var(--card);border:1px solid var(--ln);border-radius:999px;padding:8px 14px;white-space:nowrap}
+.tab.on,.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-top:6px}
+.it{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:12px;display:flex;gap:12px;align-items:center;animation:up .35s both;position:relative;cursor:pointer}
+@keyframes up{from{opacity:0;transform:translateY(8px)}}
+.it:active{transform:scale(.98)}
+.em{font-size:34px;width:56px;height:56px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:12px}
+.it b{display:block;font-size:16px}.it small{font:700 14px system-ui,sans-serif;color:var(--ac)}
+.bd{position:absolute;top:-8px;left:12px;background:var(--gd);color:#2b1a10;font:700 11px system-ui,sans-serif;padding:2px 8px;border-radius:999px}
+.hr{margin-left:auto;background:none;border:0;font-size:22px;padding:4px}
+.q{display:flex;align-items:center;gap:8px;font:700 16px system-ui,sans-serif}
+.q button{width:32px;height:32px;border-radius:50%;border:1px solid var(--ln);background:var(--bg);font-size:18px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:16px;font:15px system-ui,sans-serif}
+.card h3{font-family:Georgia,serif;margin:0 0 8px}
+.card .r{display:flex;justify-content:space-between;gap:10px;padding:2px 0}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.go{display:block;width:100%;text-align:center;box-sizing:border-box;background:var(--ac);color:#fff;border:0;border-radius:12px;padding:13px;font:700 16px system-ui,sans-serif;text-decoration:none;margin-top:10px}
+.sh{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center;z-index:30}
+.sh.on{display:flex}
+.sc{background:var(--card);width:100%;max-width:560px;border-radius:18px 18px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom,0px));max-height:90vh;overflow-y:auto;animation:sl .25s;font-family:system-ui,sans-serif}
+@keyframes sl{from{transform:translateY(40px);opacity:0}}
+.sc h3{font-family:Georgia,serif;margin:0}.hd{display:flex;justify-content:space-between;align-items:center}
+.x{background:none;border:0;font-size:22px}
+.ln{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ln)}
+.ln small{display:block;color:var(--mut);font-weight:400}
+.sum{display:flex;justify-content:space-between;padding:3px 0}
+#bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));background:var(--ac);color:#fff;border:0;border-radius:14px;padding:14px 16px;display:none;justify-content:space-between;font:700 15px system-ui,sans-serif;z-index:9;box-shadow:0 6px 20px rgba(0,0,0,.3);width:calc(100% - 24px)}
+#bar span{color:#fff}
+#toast{position:fixed;left:50%;top:calc(70px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:#222;color:#fff;font:600 14px system-ui,sans-serif;padding:9px 16px;border-radius:999px;opacity:0;transition:opacity .25s;z-index:40;pointer-events:none}
+#toast.on{opacity:1}
+.note{border:1px dashed var(--gd);border-radius:10px;padding:8px 12px;font:13px system-ui,sans-serif;color:var(--mut);margin-bottom:10px}
+.rv{font-size:17px;min-height:70px}.dots{display:flex;gap:6px;margin-top:8px}.dots i{width:8px;height:8px;border-radius:50%;background:var(--ln);cursor:pointer}.dots i.on{background:var(--ac)}
+footer{text-align:center;color:var(--mut);font:13px system-ui,sans-serif;padding:20px 0 90px}
+a.l{color:var(--ac);font-weight:700}
+
+#cf{position:fixed;right:14px;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:25;width:58px;height:58px;border-radius:50%;border:0;background:var(--gd);font-size:26px;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+#cp{position:fixed;right:12px;left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:380px;margin-left:auto;height:min(540px,75vh);background:var(--card);border:1px solid var(--ln);border-radius:16px;display:none;flex-direction:column;z-index:26;box-shadow:0 10px 30px rgba(0,0,0,.35);font-family:system-ui,sans-serif;overflow:hidden}
+#cp.on{display:flex}
+.ch{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--ac);color:#fff}.ch .x{color:#fff}
+#cm{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.m{max-width:85%;padding:9px 12px;border-radius:14px;font-size:14px;white-space:pre-line}
+.m.b{background:var(--bg);align-self:flex-start;border:1px solid var(--ln)}.m.u{background:var(--ac);color:#fff;align-self:flex-end}
+.mb{display:block;margin-top:6px;font:600 13px system-ui,sans-serif;background:var(--card);color:var(--ac);border:1px solid var(--ac);border-radius:999px;padding:6px 12px;text-decoration:none;text-align:center;cursor:pointer}
+#cq{padding:0 10px 6px;flex-wrap:nowrap}
+.ci{display:flex;gap:6px;padding:8px 10px;border-top:1px solid var(--ln)}
+.ci input{margin:0}.ci button{border:0;background:var(--ac);color:#fff;border-radius:10px;padding:0 14px;font-size:18px}
+</style></head><body>
+<nav><b id="brand"></b><span class="pill" id="open"></span><button id="cb">&#x1F6D2; <span id="cc">0</span></button></nav>
+<header class="hero"><div class="w"><h1 id="nm"></h1><p id="tg"></p>
+<a class="btn p" href="#menu">See the menu</a><a class="btn" id="wa0" target="_blank" rel="noopener">Chat on WhatsApp</a><br><div id="sp"></div></div></header>
+<main class="w">
+<section id="menu"><h2>Our menu</h2><p class="sub">Tap any food to choose spice, extras and quantity.</p>
+<input id="sr" placeholder="Search for food, e.g. jollof">
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div></section>
+<section><h2>Not sure what to eat?</h2><p class="sub">Answer three taps and we will pick for you.</p>
+<div class="card"><b>Mood</b><div class="chips" data-k="m"><button class="chip on" data-v="hearty">Hearty</button><button class="chip" data-v="light">Light</button></div>
+<b>Pepper</b><div class="chips" data-k="s"><button class="chip on" data-v="1">I like it spicy</button><button class="chip" data-v="0">Mild please</button></div>
+<b>Budget</b><div class="chips" data-k="b"><button class="chip" data-v="1000">Under &#x20A6;1,000</button><button class="chip" data-v="2000">Under &#x20A6;2,000</button><button class="chip on" data-v="9999">Any</button></div>
+<button class="go" id="pick">Pick for me</button><div id="res"></div></div></section>
+<section><h2>What customers say</h2><div class="card"><div class="rv" id="rv"></div><div class="dots" id="dots"></div></div></section>
+<section><h2>About us</h2><p id="ab" style="max-width:640px"></p></section>
+<section id="find"><h2>Find us</h2><div class="info">
+<div class="card"><h3>Opening hours</h3><span id="hr"></span></div>
+<div class="card"><h3>Where we are</h3><span id="ad"></span><br><br><a class="l" id="mp" target="_blank" rel="noopener">Open in Google Maps</a></div>
+<div class="card"><h3>Call or chat</h3><span id="ph"></span><br><br><a class="l" id="wa1" target="_blank" rel="noopener">Chat on WhatsApp</a></div></div></section>
+</main>
+<footer id="ft"></footer>
+<button id="bar"><span id="bt"></span><span>View order &#x2192;</span></button>
+<div class="sh" id="s1"><div class="sc" id="sc1"></div></div>
+<div class="sh" id="s2"><div class="sc" id="sc2"></div></div>
+<div id="toast"></div>
+<button id="cf" aria-label="Chat with us">&#x1F4AC;</button>
+<div id="cp"><div class="ch"><b id="ct"></b><button class="x" id="cx">&#x2715;</button></div><div id="cm"></div><div class="chips" id="cq"></div>
+<div class="ci"><input id="cin" placeholder="Ask about food, hours, delivery..."><button id="cs">&#x27A4;</button></div></div>
+<script src="config.js"></script>
+<script>
+/* ===== EDIT THIS PART ===== */
+const CFG={name:"Mama's Kitchen",tagline:"Home-cooked Nigerian meals, hot and ready every day.",
+ phone:"2348000000000",          // WhatsApp number: 234 then the number without the first 0
+ phoneShow:"0800 000 0000",address:"12 Sample Street, Ikeja, Lagos",fee:800,
+ about:"We cook the way you eat at home: fresh pots of jollof, soups made from scratch and swallow served hot. Come in to eat, or order and we will get it ready for you.",
+ hours:[null,[8,19],[8,19],[8,19],[8,19],[8,19],[9,18]], // Sunday first. [open hour, close hour] or null if closed
+ reviews:[["Best jollof in the area, always hot!","Tolu A."],["The egusi tastes like my grandmother's.","Chidi O."],["Fast service and fair prices.","Amaka E."]]};
+const X={prot:[["Beef",400],["Fried chicken",1500],["Fish",800],["Egg",200]],soup:[["Assorted meat",600],["Fish",800],["Extra swallow",500]]};
+// c=category n=name p=price e=emoji x=extras set sp=spice option t=tags sd=special days (0=Sun)
+const MENU=[
+{c:"Rice",n:"Jollof Rice",p:1500,e:"\u{1F35A}",x:"prot",sp:1,t:"hearty spicy",sd:[5,6]},
+{c:"Rice",n:"Fried Rice",p:1500,e:"\u{1F35B}",x:"prot",t:"hearty"},
+{c:"Rice",n:"White Rice and Stew",p:1300,e:"\u{1F35A}",x:"prot",sp:1,t:"light"},
+{c:"Rice",n:"Ofada Rice",p:2000,e:"\u{1F336}\uFE0F",x:"prot",sp:1,t:"hearty spicy",sd:[2,4]},
+{c:"Swallow and Soup",n:"Pounded Yam and Egusi",p:2500,e:"\u{1F372}",x:"soup",t:"hearty",sd:[0]},
+{c:"Swallow and Soup",n:"Amala, Ewedu and Gbegiri",p:2000,e:"\u{1F372}",x:"soup",sp:1,t:"hearty spicy",sd:[1,3]},
+{c:"Swallow and Soup",n:"Eba and Okra",p:1800,e:"\u{1F372}",x:"soup",t:"light"},
+{c:"Swallow and Soup",n:"Semo and Efo Riro",p:2000,e:"\u{1F96C}",x:"soup",t:"hearty"},
+{c:"Sides",n:"Fried Plantain",p:500,e:"\u{1F34C}",t:"light"},
+{c:"Sides",n:"Moi Moi",p:600,e:"\u{1F95F}",t:"light"},
+{c:"Sides",n:"Fried Chicken",p:1500,e:"\u{1F357}",t:"hearty spicy"},
+{c:"Sides",n:"Beef",p:400,e:"\u{1F356}",t:"hearty"},
+{c:"Drinks",n:"Zobo",p:500,e:"\u{1F964}",t:"light"},
+{c:"Drinks",n:"Chapman",p:1000,e:"\u{1F379}",t:"light"},
+{c:"Drinks",n:"Bottled Water",p:300,e:"\u{1F4A7}",t:"light"}];
+/* ===== END EDIT ===== */
+const SB=window.SB||{url:'',key:''};
+(async()=>{
+if(SB.url){try{const g=p=>fetch(SB.url+'/rest/v1/'+p,{headers:{apikey:SB.key,Authorization:'Bearer '+SB.key}}).then(r=>r.ok?r.json():Promise.reject());
+ const[st,mn]=await Promise.race([Promise.all([g('settings?select=data&id=eq.1'),g('menu_items?select=*&order=sort,id')]),new Promise((_,j)=>setTimeout(j,4000))]);
+ if(st[0]&&st[0].data)Object.assign(CFG,st[0].data);
+ if(mn.length){MENU.length=0;mn.forEach(r=>MENU.push({c:r.category,n:r.name,p:r.price,e:r.emoji,x:r.extras||undefined,sp:r.spice?1:0,t:r.tags||'',sd:r.special_days||[],out:r.sold_out}))}}catch(e){}}
+
+const $=id=>document.getElementById(id),fmt=n=>'\u20A6'+Math.round(n).toLocaleString('en-US'),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cats=['All','Favourites',...new Set(MENU.map(m=>m.c))],DN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+let cat='All',q='',cart=[],favs=[],mode='pickup',cur=null,form={name:'',addr:''},pk={m:'hearty',s:'1',b:'9999'},rvi=0;
+try{cart=JSON.parse(localStorage.getItem('cart')||'[]');favs=JSON.parse(localStorage.getItem('favs')||'[]')}catch(e){}
+cart=cart.filter(l=>MENU[l.i]);favs=favs.filter(i=>MENU[i]);
+const sv=()=>{try{localStorage.setItem('cart',JSON.stringify(cart));localStorage.setItem('favs',JSON.stringify(favs))}catch(e){}};
+const lt=l=>{const m=MENU[l.i];return(m.p+l.x.reduce((s,k)=>s+X[m.x][k][1],0))*l.q};
+const toast=t=>{const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove('on'),1400)};
+const fh=h=>(h%12||12)+(h<12?'am':'pm'),lagos=()=>new Date(new Date().toLocaleString('en-US',{timeZone:'Africa/Lagos'}));
+const wl=t=>'https://wa.me/'+CFG.phone+'?text='+encodeURIComponent(t);
+/* static text */
+document.title=CFG.name+' - Home-cooked Nigerian Meals';
+$('brand').textContent=CFG.name;$('nm').textContent=CFG.name;$('tg').textContent=CFG.tagline;$('ab').textContent=CFG.about;$('ad').textContent=CFG.address;$('ph').textContent=CFG.phoneShow;
+$('ft').textContent='\u00A9 '+new Date().getFullYear()+' '+CFG.name;
+$('hr').innerHTML=CFG.hours.map((h,d)=>`<div class="r"><span>${DN[d]}</span><b>${h?fh(h[0])+' - '+fh(h[1]):'Closed'}</b></div>`).join('');
+$('mp').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(CFG.address);
+['wa0','wa1'].forEach(i=>$(i).href=wl('Hello '+CFG.name+', I have a question.'));
+/* open now */
+function status(){const d=lagos(),h=d.getHours()+d.getMinutes()/60,H=CFG.hours[d.getDay()],o=H&&h>=H[0]&&h<H[1],e=$('open');
+ e.className='pill '+(o?'o':'c');e.textContent=o?'Open now \u00B7 until '+fh(H[1]):'Closed now'}
+status();setInterval(status,60000);
+/* special */
+const today=lagos().getDay(),spi=MENU.findIndex(m=>m.sd&&m.sd.includes(today));
+if(spi>=0){$('sp').textContent='\u2B50 Today\'s special: '+MENU[spi].n;$('sp').onclick=()=>openItem(spi)}else $('sp').style.display='none';
+/* menu */
+function tabs(){$('tabs').innerHTML=cats.map(c=>`<button class="tab ${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
+ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{cat=b.dataset.c;tabs();grid()})}
+function grid(){const L=MENU.map((m,i)=>[m,i]).filter(([m,i])=>(cat==='All'||(cat==='Favourites'?favs.includes(i):m.c===cat))&&m.n.toLowerCase().includes(q));
+ $('grid').innerHTML=L.length?L.map(([m,i])=>`<div class="it" data-i="${i}">${m.out?'<span class="bd" style="background:#888;color:#fff">Sold out</span>':m.sd&&m.sd.includes(today)?'<span class="bd">Today\'s special</span>':''}<div class="em">${m.e}</div><div><b>${m.n}</b><small>${fmt(m.p)}</small></div><button class="hr" data-f="${i}" aria-label="Favourite">${favs.includes(i)?'\u2764\uFE0F':'\u{1F90D}'}</button></div>`).join(''):'<p class="sub">Nothing found. Try another word.</p>';
+ document.querySelectorAll('.it').forEach(e=>e.onclick=()=>openItem(+e.dataset.i));
+ document.querySelectorAll('[data-f]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const i=+b.dataset.f;favs=favs.includes(i)?favs.filter(f=>f!==i):[...favs,i];sv();grid();toast(favs.includes(i)?'Saved to favourites':'Removed')})}
+$('sr').oninput=e=>{q=e.target.value.toLowerCase().trim();grid()};
+/* item sheet */
+const close=()=>{$('s1').classList.remove('on');$('s2').classList.remove('on')};
+document.querySelectorAll('.sh').forEach(s=>s.onclick=e=>{if(e.target===s)close()});
+function openItem(i){const m=MENU[i];if(m.out){toast('Sorry, sold out today');return}cur={i,q:1,x:[],sp:m.sp?'Medium':null,note:''};drawItem();$('s1').classList.add('on')}
+function drawItem(){const m=MENU[cur.i],ex=X[m.x]||[];
+ $('sc1').innerHTML=`<div class="hd"><h3>${m.e} ${m.n}</h3><button class="x" data-close>\u2715</button></div><p style="color:var(--mut);margin:2px 0 8px">${fmt(m.p)}</p>`
+ +(m.sp?`<b>Spice level</b><div class="chips">${['Mild','Medium','Hot'].map(s=>`<button class="chip ${cur.sp===s?'on':''}" data-s="${s}">${s}</button>`).join('')}</div>`:'')
+ +(ex.length?`<b>Extras</b><div class="chips">${ex.map((e,k)=>`<button class="chip ${cur.x.includes(k)?'on':''}" data-x="${k}">${e[0]} +${fmt(e[1])}</button>`).join('')}</div>`:'')
+ +`<b>Note for the kitchen</b><input id="nt" placeholder="e.g. less pepper, extra stew"><div class="hd" style="margin-top:8px"><div class="q"><button data-m="-1">-</button><span>${cur.q}</span><button data-m="1">+</button></div><b>${fmt(lt(cur))}</b></div><button class="go" id="add">Add to order</button>`;
+ $('nt').value=cur.note;$('nt').oninput=e=>cur.note=e.target.value;
+ document.querySelectorAll('#sc1 [data-s]').forEach(b=>b.onclick=()=>{cur.sp=b.dataset.s;drawItem()});
+ document.querySelectorAll('#sc1 [data-x]').forEach(b=>b.onclick=()=>{const k=+b.dataset.x;cur.x=cur.x.includes(k)?cur.x.filter(v=>v!==k):[...cur.x,k];drawItem()});
+ document.querySelectorAll('#sc1 [data-m]').forEach(b=>b.onclick=()=>{cur.q=Math.max(1,cur.q+ +b.dataset.m);drawItem()});
+ document.querySelector('#sc1 [data-close]').onclick=close;
+ $('add').onclick=()=>{const key=JSON.stringify([cur.i,cur.sp,[...cur.x].sort(),cur.note.trim()]),f=cart.find(l=>l.key===key);
+  if(f)f.q+=cur.q;else cart.push({key,i:cur.i,sp:cur.sp,x:[...cur.x].sort(),note:cur.note.trim(),q:cur.q});sv();bar();close();toast('Added: '+m.n)}}
+/* cart */
+function bar(){const n=cart.reduce((s,l)=>s+l.q,0),t=cart.reduce((s,l)=>s+lt(l),0);$('cc').textContent=n;$('bar').style.display=n?'flex':'none';$('bt').textContent=n+(n>1?' items':' item')+' \u00B7 '+fmt(t)}
+function openCart(){drawCart();$('s2').classList.add('on')}
+$('cb').onclick=openCart;$('bar').onclick=openCart;
+function drawCart(){const sub=cart.reduce((s,l)=>s+lt(l),0),fee=mode==='delivery'&&cart.length?CFG.fee:0;
+ $('sc2').innerHTML=`<div class="hd"><h3>Your order</h3><button class="x" data-close>\u2715</button></div>`+(cart.length?cart.map((l,k)=>{const m=MENU[l.i],d=[l.sp?l.sp+' spice':'',...l.x.map(j=>X[m.x][j][0])].filter(Boolean).join(', ');
+  return `<div class="ln"><div><b>${m.e} ${m.n}</b><small>${esc(d)}${l.note?(d?' | ':'')+esc(l.note):''}</small></div><div class="q"><button data-k="${k}" data-d="-1">-</button><span>${l.q}</span><button data-k="${k}" data-d="1">+</button></div><b>${fmt(lt(l))}</b></div>`}).join('')
+  +`<div class="chips" style="margin-top:8px"><button class="chip ${mode==='pickup'?'on':''}" data-md="pickup">Pickup</button><button class="chip ${mode==='delivery'?'on':''}" data-md="delivery">Delivery (+${fmt(CFG.fee)})</button></div>`
+  +`<input id="fn" placeholder="Your name">`+(mode==='delivery'?`<input id="fa" placeholder="Delivery address">`:'')
+  +`<div class="sum"><span>Subtotal</span><span>${fmt(sub)}</span></div>`+(fee?`<div class="sum"><span>Delivery</span><span>${fmt(fee)}</span></div>`:'')+`<div class="sum"><b>Total</b><b>${fmt(sub+fee)}</b></div><a class="go" id="send" target="_blank" rel="noopener">Send order on WhatsApp</a><p style="font-size:12px;color:var(--mut)">You pay when you collect or when it arrives, unless the kitchen tells you otherwise.</p>`
+  :'<p style="color:var(--mut)">Your basket is empty. Tap any food on the menu to add it.</p>');
+ document.querySelector('#sc2 [data-close]').onclick=close;
+ document.querySelectorAll('#sc2 [data-d]').forEach(b=>b.onclick=()=>{const l=cart[+b.dataset.k];l.q+=+b.dataset.d;if(l.q<1)cart.splice(+b.dataset.k,1);sv();bar();drawCart()});
+ document.querySelectorAll('#sc2 [data-md]').forEach(b=>b.onclick=()=>{mode=b.dataset.md;drawCart()});
+ if(!cart.length)return;
+ const fn=$('fn'),fa=$('fa');fn.value=form.name;fn.oninput=e=>{form.name=e.target.value;link()};if(fa){fa.value=form.addr;fa.oninput=e=>{form.addr=e.target.value;link()}}
+ function link(){const lines=cart.map(l=>{const m=MENU[l.i],d=[l.sp?l.sp+' spice':'',...l.x.map(j=>X[m.x][j][0])].filter(Boolean).join(', ');return `- ${l.q} x ${m.n}${d?' ('+d+')':''}${l.note?' [Note: '+l.note+']':''}`}).join('\n');
+  $('send').href=wl(`Hello ${CFG.name}, I would like to order:\n\n${lines}\n\nSubtotal: ${fmt(sub)}${fee?'\nDelivery: '+fmt(fee):''}\nTotal: ${fmt(sub+fee)}\n\nName: ${form.name}\n${mode==='delivery'?'Deliver to: '+form.addr:'I will pick up.'}`)}
+ link();$('send').onclick=e=>{if(!form.name.trim()||(mode==='delivery'&&!form.addr.trim())){e.preventDefault();toast('Please enter your name'+(mode==='delivery'?' and address':''));return}
+  if(!SB.url)return;const items=cart.map(l=>{const m=MENU[l.i];return{n:m.n,q:l.q,o:[l.sp?l.sp+' spice':'',...l.x.map(j=>X[m.x][j][0])].filter(Boolean).join(', '),note:l.note,t:lt(l)}}),body=JSON.stringify({customer:form.name.trim(),mode,address:mode==='delivery'?form.addr.trim():'',items,subtotal:sub,fee,total:sub+fee}),now=Date.now();
+  if(drawCart.b===body&&now-drawCart.t<60000)return;drawCart.b=body;drawCart.t=now;
+  fetch(SB.url+'/rest/v1/orders',{method:'POST',keepalive:true,headers:{apikey:SB.key,Authorization:'Bearer '+SB.key,'Content-Type':'application/json',Prefer:'return=minimal'},body}).catch(()=>{})}}
+/* picker */
+document.querySelectorAll('[data-k]').forEach(g=>g.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{pk[g.dataset.k]=b.dataset.v;g.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b))}));
+$('pick').onclick=()=>{let L=MENU.map((m,i)=>[m,i]).filter(([m])=>m.c!=='Drinks'&&m.t.includes(pk.m)&&m.p<=+pk.b&&(pk.s==='1'?true:!m.t.includes('spicy')));
+ if(!L.length)L=MENU.map((m,i)=>[m,i]).filter(([m])=>m.c!=='Drinks'&&m.p<=+pk.b);
+ if(!L.length){$('res').innerHTML='<p>Nothing matches that budget. Try a higher one!</p>';return}
+ const[m,i]=L[Math.floor(Math.random()*L.length)];$('res').innerHTML=`<div class="it" style="margin-top:12px" id="rc"><div class="em">${m.e}</div><div><b>We say: ${m.n}</b><small>${fmt(m.p)} \u00B7 tap to order</small></div></div>`;$('rc').onclick=()=>openItem(i)};
+/* reviews */
+function rv(){const r=CFG.reviews[rvi];$('rv').innerHTML=`\u201C${esc(r[0])}\u201D<br><small style="color:var(--mut)">\u2605\u2605\u2605\u2605\u2605 ${esc(r[1])}</small>`;$('dots').innerHTML=CFG.reviews.map((_,k)=>`<i class="${k===rvi?'on':''}" data-r="${k}"></i>`).join('');
+ document.querySelectorAll('[data-r]').forEach(d=>d.onclick=()=>{rvi=+d.dataset.r;rv()})}
+setInterval(()=>{rvi=(rvi+1)%CFG.reviews.length;rv()},5000);
+tabs();grid();bar();rv();
+/* chat assistant */
+const cm=$('cm'),cp=$('cp');$('ct').textContent=CFG.name+' assistant';
+function chSay(t,who,btns){const d=document.createElement('div');d.className='m '+who;const p=document.createElement('div');p.textContent=t;d.appendChild(p);
+ (btns||[]).forEach(([l,a])=>{let b;if(typeof a==='string'){b=document.createElement('a');b.href=a;b.target='_blank';b.rel='noopener'}else{b=document.createElement('button');b.onclick=a}b.className='mb';b.textContent=l;d.appendChild(b)});
+ cm.appendChild(d);cm.scrollTop=cm.scrollHeight}
+const chClose=()=>{cp.classList.remove('on');$('cf').style.display=''};
+const lines=a=>a.map(i=>'- '+MENU[i].n+': '+fmt(MENU[i].p)).join('\n'),idx=f=>MENU.map((m,i)=>i).filter(i=>f(MENU[i])),addB=i=>['Choose '+MENU[i].n,()=>{chClose();openItem(i)}];
+function chAnswer(raw){const s=' '+raw.toLowerCase().replace(/[^a-z0-9 ]/g,' ')+' ',has=(...w)=>w.some(x=>s.includes(x)),num=+((raw.replace(/,/g,'').match(/\d{3,5}/)||[0])[0]);
+ const gen=['rice','and','white','with'],hit=idx(m=>m.n.toLowerCase().split(/[ ,]+/).some(w=>w.length>=4&&!gen.includes(w)&&s.includes(' '+w)));
+ if(has(' hello ',' hi ',' hey ','good morning','good afternoon','good evening','how far'))return['Hello! Welcome to '+CFG.name+'. How can I help?'];
+ if(has('thank'))return['You are welcome! Enjoy your meal.'];
+ if(has(' hour','opening','closing',' open ',' close ','what time','when do'))return[$('open').textContent+'.\n\n'+CFG.hours.map((h,d)=>DN[d]+': '+(h?fh(h[0])+' - '+fh(h[1]):'Closed')).join('\n')];
+ if(has('where','address','locat','direction','find you'))return[CFG.address,[['Open in Google Maps',$('mp').href]]];
+ if(has('phone','call','contact','whatsapp','number'))return['You can call '+CFG.phoneShow+' or chat with us on WhatsApp.',[['Chat on WhatsApp',wl('Hello '+CFG.name)]]];
+ if(has('deliver'))return['Yes, we deliver. Delivery costs '+fmt(CFG.fee)+'. Add your food to the basket, choose Delivery, enter your address and send the order on WhatsApp.',[['Open my basket',()=>{chClose();openCart()}]]];
+ if(has('pay','transfer','cash','card'))return['You pay when you collect or when your food arrives, unless the kitchen tells you otherwise on WhatsApp.'];
+ if(hit.length===1){const m=MENU[hit[0]];return[m.n+' is '+fmt(m.p)+'.'+(m.x?' Extras: '+X[m.x].map(e=>e[0]+' '+fmt(e[1])).join(', ')+'.':'')+(m.sp?' You can choose mild, medium or hot.':''),[addB(hit[0])]]}
+ if(hit.length>1)return['Here is what I found:\n'+lines(hit),hit.slice(0,3).map(addB)];
+ if(num&&has('under','below','less','within','budget','max'))return idx(m=>m.p<=num).length?['What fits '+fmt(num)+' or less:\n'+lines(idx(m=>m.p<=num))]:['Nothing is that cheap, but our lowest price is '+fmt(Math.min(...MENU.map(m=>m.p)))+'.'];
+ if(has('cheap'))return['Budget-friendly picks:\n'+lines(idx(m=>m.p<=1000))];
+ const cc=has('rice')?'Rice':has('soup','swallow')?'Swallow and Soup':has('drink')?'Drinks':has('side')?'Sides':'';
+ if(cc)return[cc+':\n'+lines(idx(m=>m.c===cc)),idx(m=>m.c===cc).slice(0,3).map(addB)];
+ if(has('spicy','pepper',' hot '))return['Our spicy dishes:\n'+lines(idx(m=>m.t.includes('spicy'))),[['See the menu',()=>{chClose();location.hash='#menu'}]]];
+ if(has('light','mild'))return['Lighter choices:\n'+lines(idx(m=>m.t.includes('light')&&m.c!=='Drinks'))];
+ if(has('special','today'))return spi>=0?['Today\'s special is '+MENU[spi].n+' ('+fmt(MENU[spi].p)+').',[addB(spi)]]:['No special today, but everything on the menu is fresh!'];
+ if(has('order'))return['Tap any food on the menu, choose your spice and extras, then open your basket and send the order on WhatsApp.',[['Open my basket',()=>{chClose();openCart()}],['See the menu',()=>{chClose();location.hash='#menu'}]]];
+ if(has('menu','food','price','cost','eat','how much'))return['We have '+cats.slice(2).join(', ')+'. Ask me about any of them, for example "how much is jollof rice?"',[['See the full menu',()=>{chClose();location.hash='#menu'}]]];
+ return['I am not sure about that one. I can help with the menu, prices, opening hours, delivery and how to order. For anything else, chat with us on WhatsApp.',[['Chat on WhatsApp',wl('Hello '+CFG.name+', I have a question.')]]]}
+function chAsk(t){if(!t.trim())return;chSay(t,'u');$('cin').value='';setTimeout(()=>{const[a,b]=chAnswer(t);chSay(a,'b',b)},400)}
+$('cs').onclick=()=>chAsk($('cin').value);$('cin').onkeydown=e=>{if(e.key==='Enter')chAsk($('cin').value)};
+$('cf').onclick=()=>{cp.classList.add('on');$('cf').style.display='none';if(!cm.children.length)chSay('Hi! I am the '+CFG.name+' assistant. Ask me about the menu, prices, opening hours or delivery.','b')};
+$('cx').onclick=chClose;
+$('cq').innerHTML=['Opening hours','Delivery','Today\'s special','Rice options','Under 1500'].map(t=>'<button class="chip" data-q="'+t+'">'+t+'</button>').join('');
+document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>chAsk(b.dataset.q));
+
+})();</script></body></html>
